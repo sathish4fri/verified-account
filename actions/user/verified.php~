@@ -1,0 +1,28 @@
+<?php
+$guid = input('guid');
+
+$user = ossn_user_by_guid($guid);
+if($user->isAdmin()){
+$userverifed = "ADMIN";
+}else{
+$userverifed = input('verified');
+}
+
+
+$OssnComponents = new OssnComponents;
+
+if(isset($user))
+{
+$suc = $OssnComponents->setComSETTINGS('verified-account', 'verified', $userverifed);
+
+
+	if($suc){
+		ossn_trigger_message('user verified');
+		redirect(REF);
+	} else {
+		ossn_trigger_message('Cannot save settings', 'error');
+		redirect(REF);
+	}
+}else{
+	ossn_trigger_message('Please Enter the value ', 'error');
+}

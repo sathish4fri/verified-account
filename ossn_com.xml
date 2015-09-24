@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component xmlns="http://www.opensource-socialnetwork.org/v/3.0">
+    <name>Verified Account</name>
+    <id>verified-account</id>
+    <author>Sathish Kumar and Paritosh Pandey</author>
+    <description>Show a verified badge at profile.</description>
+    <license>GNU General Public License, version 2</license>
+    <author_url>http://www.webbehinds.net/</author_url>
+    <license_url>http://www.opensource-socialnetwork.org/licence/</license_url>
+    <version>3.0</version>
+	<requires>
+		<type>ossn_version</type>
+		<version>3.0</version>
+	</requires>
+</component>
