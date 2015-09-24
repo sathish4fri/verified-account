@@ -64,13 +64,13 @@ $set = $set->get_entities();
 if ($set[0]->value == 'true') {
 ?>
 <td><p style="font-weight: bold; color: forestgreen;">Verified</p></td>
-<td><button style="background-color: lightsalmon;"><a href="<?php echo ossn_site_url("action/unverify/user?guid={$user->guid}&verified=true", true); ?>" >unverify</a></button></td>
+<td><a href="<?php echo ossn_site_url("action/unverify/user?guid={$user->guid}&verified=true", true); ?>" >unverify</a></td>
 <?php
 } else {
 ?>
 <td></td>
 <td>
-<button><a href="<?php echo ossn_site_url("action/verified/user?guid={$user->guid}&verified=true", true); ?>" ><?php echo ossn_print('verify'); ?></a></button>
+<a href="<?php echo ossn_site_url("action/verified/user?guid={$user->guid}&verified=true", true); ?>" ><?php echo ossn_print('verify'); ?></a>
 </td>
 <?php
 }
