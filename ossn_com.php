@@ -16,6 +16,7 @@ function verified_account_init() {
 	
 	if (ossn_isLoggedin()) {
         ossn_register_action('verified/user', __OSSN_VERIF__ . 'actions/user/verified.php');
+        ossn_register_action('unverify/user', __OSSN_VERIF__ . 'actions/user/unverify.php');
     }
 	ossn_extend_view('css/ossn.default', 'css/verified-account');
 	ossn_extend_view('js/opensource.socialnetwork', 'js/jquery.tipsy');
