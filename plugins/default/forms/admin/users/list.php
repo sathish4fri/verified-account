@@ -29,6 +29,8 @@ if (!empty($search)) {
         <th><?php echo ossn_print('lastlogin'); ?></th>
         <th><?php echo ossn_print('edit'); ?></th>
         <th><?php echo ossn_print('delete'); ?></th>
+        <th>Status</th>
+        <th>Verify User</th>  
     </tr>
     <?php foreach ($pagination->getItem() as $user) {
         $user = ossn_user_by_guid($user->guid);
@@ -36,7 +38,14 @@ if (!empty($search)) {
 		if(!empty($user->last_login)){
 			$lastlogin = ossn_user_friendly_time($user->last_login);
 		}
-        ?>
+
+$set = new OssnEntities;
+$set->type ='user';
+$set->subtype = 'verified';
+$set->owner_guid = $user->guid;
+$set->limit = '1';
+$set = $set->get_entities(); 
+?>
         <tr>
             <td>
                 <div class="left image"><img src="<?php echo $user->iconURL()->smaller; ?>"/></div>
@@ -50,7 +59,24 @@ if (!empty($search)) {
                 <a href="<?php echo ossn_site_url("administrator/edituser/{$user->username}"); ?>"><?php echo ossn_print('edit'); ?></a>
             </td>
             <td><a href="<?php echo ossn_site_url("action/admin/delete/user?guid={$user->guid}", true); ?>" class="userdelete"><?php echo ossn_print('delete'); ?></a></td>
-            <td><a href="<?php echo ossn_site_url("action/verified/user?guid={$user->guid}&verified=true", true); ?>" ><?php echo ossn_print('verify'); ?></a></td>        </tr>
+
+<?php
+if ($set[0]->value == 'true') {
+?>
+<td><p style="font-weight: bold; color: forestgreen;">Verified</p></td>
+<td><a href="<?php echo ossn_site_url("action/unverify/user?guid={$user->guid}&verified=true", true); ?>" >unverify</a></td>
+<?php
+} else {
+?>
+<td></td>
+<td>
+<a href="<?php echo ossn_site_url("action/verified/user?guid={$user->guid}&verified=true", true); ?>" ><?php echo ossn_print('verify'); ?></a>
+</td>
+<?php
+}
+?>
+
+</tr>
             <?php 
             } ?>
     </tbody>
